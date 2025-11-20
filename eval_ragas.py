@@ -14,7 +14,7 @@ print("⚖️  Configuration du Juge Ragas...")
 JUDGE_MODEL_NAME = "mistral"
 
 print(f"   Utilisation du modèle : {JUDGE_MODEL_NAME}")
-judge_llm = ChatOllama(model=JUDGE_MODEL_NAME, temperature=0)
+judge_llm = ChatOllama(model=JUDGE_MODEL_NAME, temperature=0, format="json")
 judge_embeddings = OllamaEmbeddings(model="nomic-embed-text")
 
 # ==========================================
@@ -23,16 +23,16 @@ judge_embeddings = OllamaEmbeddings(model="nomic-embed-text")
 TEST_QUESTIONS = [
     "Quels sont les symptômes principaux du diabète ?",
     "Comment diagnostique-t-on un diabète de type 2 ?",
-    "Quels sont les chiffres du diabète en France ?",
-    "Quelle est la différence entre diabète type 1 et type 2 ?" 
+    # "Quels sont les chiffres du diabète en France ?",
+    # "Quelle est la différence entre diabète type 1 et type 2 ?" 
 ]
 
 # CORRECTION ICI : Ce sont des Strings simples, pas des listes ["..."]
 GROUND_TRUTHS = [
     "Soif intense, urines abondantes, fatigue, perte de poids.",
     "Prise de sang à jeun (glycémie > 1,26 g/l à deux reprises).",
-    "Plus de 3,5 millions de personnes traitées en 2020.",
-    "Le type 1 est auto-immun (insuline), le type 2 est lié au mode de vie et à l'âge."
+    # "Plus de 3,5 millions de personnes traitées en 2020.",
+    # "Le type 1 est auto-immun (insuline), le type 2 est lié au mode de vie et à l'âge."
 ]
 
 def build_dataset():
@@ -75,7 +75,11 @@ def run_evaluation():
     print("\n📊 Lancement de l'évaluation (Patience, c'est lent en local)...")
     
     # On configure pour éviter que ça plante si c'est trop long
-    my_run_config = RunConfig(timeout=120, max_retries=3)
+    my_run_config = RunConfig(
+        timeout=300,      # On laisse 5 minutes par question (large sécurité)
+        max_retries=1,    # On réessaie 1 fois en cas d'échec
+        max_workers=1     # <--- LE SECRET : Une seule évaluation à la fois !
+    )
     
     results = evaluate(
         dataset=dataset,

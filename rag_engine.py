@@ -62,7 +62,7 @@ class LocalRAGSystem:
             )
             self.retriever = self.vector_store.as_retriever(search_kwargs={"k": 4})
 
-        print("🧠 Chargement du LLM (llama3.2)...")
+        print("🧠 Chargement du LLM...")
         self.llm = ChatOllama(model="llama3.2", temperature=0)
 
         template = """Tu es un assistant médical précis. Utilise uniquement le contexte suivant pour répondre.
