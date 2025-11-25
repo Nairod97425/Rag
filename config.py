@@ -1,35 +1,3 @@
-# # ============================================================
-# # FICHIER 2: config.py
-# # Configuration du projet (URLs, paramètres)
-# # ============================================================
-
-# # Liste des URLs à scraper
-# URLS_TO_SCRAPE = [
-#     "https://www.ameli.fr/la-reunion/assure/sante/themes/diabete-adulte/diabete-symptomes-evolution/diagnostic-diabete",
-#     "https://www.federationdesdiabetiques.org/information/diabete/chiffres-france",
-#     # Ajoute tes URLs ici
-# ]
-
-# # Paramètres de scraping
-# # SCRAPING_CONFIG = {
-# #     "threads": 2,
-# #     "sleep_time": 5,
-# #     "chunk_size": 1000,
-# #     "overlap": 200,
-# #     "output_dir": "data",
-# #     "save_individual": True,      # Nouveau: sauvegarder chaque URL séparément
-# #     "save_consolidated": True      # Nouveau: sauvegarder aussi un fichier global
-# # }
-# SCRAPING_CONFIG = {
-#     "threads": 2,           # Nombre de téléchargements simultanés
-#     "sleep_time": 5,        # Délai entre requêtes (secondes)
-#     "chunk_size": 10000,     # Taille des chunks (caractères)
-#     "overlap": 10000          # Chevauchement entre chunks
-# }
-
-# # Fichier de sortie
-# OUTPUT_FILE = "data/scraped_data.json"
-# config.py
 from pathlib import Path
 
 # === URLs à scraper ===

@@ -76,21 +76,21 @@ if prompt := st.chat_input("Votre question ici..."):
                 message_placeholder.markdown(answer)
                 
                 # Préparation des sources pour l'affichage
-                formatted_sources = []
-                if docs:
-                    with st.expander("📚 Voir les sources utilisées"):
-                        for doc in docs:
-                            source_title = doc.metadata.get('title', 'Sans titre')
-                            source_url = doc.metadata.get('source', '#')
-                            st.markdown(f"- **[{source_title}]({source_url})**")
-                            st.caption(f"...{doc.page_content[:150]}...") # Aperçu du texte
-                            formatted_sources.append(f"[{source_title}]({source_url})")
+                # formatted_sources = []
+                # if docs:
+                #     with st.expander("📚 Voir les sources utilisées"):
+                #         for doc in docs:
+                #             source_title = doc.metadata.get('title', 'Sans titre')
+                #             source_url = doc.metadata.get('source', '#')
+                #             st.markdown(f"- **[{source_title}]({source_url})**")
+                #             st.caption(f"...{doc.page_content[:150]}...") # Aperçu du texte
+                #             formatted_sources.append(f"[{source_title}]({source_url})")
 
-                # Sauvegarde dans l'historique
+                # # Sauvegarde dans l'historique
                 st.session_state.messages.append({
                     "role": "assistant", 
                     "content": answer,
-                    "sources": formatted_sources
+                    # "sources": formatted_sources
                 })
                 
             except Exception as e:
